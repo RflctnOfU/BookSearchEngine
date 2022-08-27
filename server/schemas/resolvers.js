@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Book, User } = require('../models');
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -48,13 +48,13 @@ const resolvers = {
     },
 
     // Add a third argument to the resolver to access data in our `context`
-    saveBook: async (parent, { newBook }, context) => {
+    saveBook: async (parent, { saveNewBook }, context) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.users) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
           {
-            $push: { savedBooks: newBook },
+            $push: { savedBooks: saveNewBook },
           },
           {
             new: true,
