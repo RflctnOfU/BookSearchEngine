@@ -5,6 +5,11 @@
   ![screenshot](/client/public/images/Screen%20Shot%202022-08-29%20at%205.41.13%20PM.png)
   ![screenshot](/client/public/images/Screen%20Shot%202022-08-29%20at%205.41.34%20PM.png)
   ![screenshot](/client/public/images/Screen%20Shot%202022-08-29%20at%205.41.55%20PM.png)
+
+  ---
+  ## Deployed App
+  [Book Search Engine](https://refactored-book-search.herokuapp.com/)
+
   ---
   ## Description
 
@@ -61,5 +66,4 @@
   If you have questions, send me an [email](rflctnofu@hotmail.com)
 
   ---
-  ## Deployed App
-  [Book Search Engine]()
+
