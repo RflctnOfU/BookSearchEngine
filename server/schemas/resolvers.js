@@ -2,7 +2,9 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
+
 const resolvers = {
+  // queries the database for information about saved books of the logged in user
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
@@ -14,12 +16,14 @@ const resolvers = {
   },
 
   Mutation: {
+    // create a new account
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
 
       return { token, user };
     },
+    // login to an existing account
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -36,7 +40,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-
+    // save a book to an existing account
     saveBook: async (parent, { saveNewBook }, context) => {
       if (context.user) {
         const savedBook = await User.findByIdAndUpdate(
@@ -54,6 +58,7 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
+    // delete a book from the saved books in the account
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
         const delBook = await User.findOneAndUpdate({ _id: context.user._id }, { $pull: { savedBooks: { bookId } } }, { new: true });
